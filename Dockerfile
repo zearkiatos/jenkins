@@ -1,8 +1,5 @@
-FROM jenkins:2.60.3-alpine
+FROM jenkins:2.60.3
 
 USER root
-RUN apk update && apk add ruby
-
-CMD /bin/tini -s -- /usr/local/bin/jenkins.sh --httpPort=$PORT
-
-EXPOSE 8080
+RUN apt-get update && apt-get install -y ruby
+USER jenkins
