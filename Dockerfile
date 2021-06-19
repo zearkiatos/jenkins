@@ -16,5 +16,9 @@ RUN add-apt-repository \
        "deb [arch=amd64] https://download.docker.com/linux/debian \
        $(lsb_release -cs) stable"
 RUN apt-get update && apt-get install -y docker-ce-cli
+RUN apt-get install curl -y
+RUN curl -fsSL https://deb.nodesource.com/setup_16.x
+RUN apt-get update
+RUN apt-get install -y nodejs
 USER jenkins
 RUN jenkins-plugin-cli --plugins "blueocean:1.24.7 docker-workflow:1.26"
