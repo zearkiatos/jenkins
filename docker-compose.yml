@@ -15,6 +15,22 @@ services:
             - jenkins-data:/var/jenkins_home
             -  /var/run/docker.sock:/var/run/docker.sock
         restart: always
+    slave:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        env_file: 
+            - .env
+        container_name: jenkins-slave
+        ports:
+            - "8081:8080"
+        volumes:
+            - jenkins-slave-docker-certs:/certs/client
+            - jenkins-slave-data:/var/jenkins_home
+            -  /var/run/docker.sock:/var/run/docker.sock
+        restart: always
 volumes:
     jenkins-data:
     jenkins-docker-certs:
+    jenkins-slave-data:
+    jenkins-slave-docker-certs:
