@@ -20,5 +20,8 @@ RUN apt-get install curl -y
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x
 RUN apt-get update
 RUN apt-get install -y nodejs
+RUN apt-get update
+RUN apt-get install docker-ce -y
+RUN usermod -a -G docker jenkins
 USER jenkins
 RUN jenkins-plugin-cli --plugins "blueocean:1.24.7 docker-workflow:1.26"
