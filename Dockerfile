@@ -22,8 +22,6 @@ RUN apt-get update
 RUN apt-get install -y nodejs
 RUN apt-get update
 RUN apt-get install docker-ce -y
-COPY docker/entrypoint.sh .
+RUN usermod -a -G docker jenkins
 USER jenkins
 RUN jenkins-plugin-cli --plugins "blueocean:1.24.7 docker-workflow:1.26"
-USER root
-ENTRYPOINT [ "sh", "entrypoint.sh" ]
